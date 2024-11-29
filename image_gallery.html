@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Image Gallery</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Image Gallery</h1>
+  </div>
+
+<div class="gallery">
+  <div class="image-wrapper">
+    <img src="images/th (10).jfif" alt="Autumn" class="box">
+  </div>
+  <div class="image-wrapper">
+    <img src="images/th (12).jfif" alt="Horizon" class="box">
+  </div>
+  <div class="image-wrapper">
+    <img src="images/th (6).jfif" alt="Horizon" class="box">
+  </div>
+  <div class="image-wrapper">
+    <img src="images/th (2).jfif" alt="Horizon" class="box">
+  </div>
+  <div class="image-wrapper">
+    <img src="images/th (16).jfif" alt="Horizon" class="box">
+  </div>
+  <div class="image-wrapper">
+    <img src="images/th (14).jfif" alt="Horizon" class="box">
+  </div>
+
+
+  <div class="image-wrapper">
+    <img src="images/th (10).jfif" alt="Autumn" class="box">
+  </div>
+  <div class="image-wrapper">
+    <img src="images/th (12).jfif" alt="Horizon" class="box">
+  </div>
+  <div class="image-wrapper">
+    <img src="images/th (6).jfif" alt="Horizon" class="box">
+  </div>
+  <div class="image-wrapper">
+    <img src="images/th (2).jfif" alt="Horizon" class="box">
+  </div>
+  <div class="image-wrapper">
+    <img src="images/th (16).jfif" alt="Horizon" class="box">
+  </div>
+  <div class="image-wrapper">
+    <img src="images/th (14).jfif" alt="Horizon" class="box">
+  </div>
+
+</div>
+
+  
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const boxImages = document.querySelectorAll('.box');
+    let currentIndex = 0;
+
+    boxImages.forEach(function (image, index) {
+      image.addEventListener('click', function () {
+        currentIndex = index;
+        showFullImage(currentIndex);
+      });
+    });
+
+    function showFullImage(index) {
+      const fullImageContainer = document.createElement('div');
+      fullImageContainer.classList.add('full-image');
+
+      const fullImage = document.createElement('img');
+      fullImage.src = boxImages[index].src;
+
+      const closeButton = document.createElement('span');
+      closeButton.classList.add('close-button');
+      closeButton.innerHTML = '&times;';
+      closeButton.addEventListener('click', function () {
+        document.body.removeChild(fullImageContainer);
+      });
+
+      const prevButton = document.createElement('span');
+      prevButton.classList.add('nav-button', 'prev-button');
+      prevButton.innerHTML = '&#10094;';
+      prevButton.addEventListener('click', function () {
+        currentIndex = (currentIndex - 1 + boxImages.length) % boxImages.length;
+        fullImage.src = boxImages[currentIndex].src;
+      });
+
+      const nextButton = document.createElement('span');
+      nextButton.classList.add('nav-button', 'next-button');
+      nextButton.innerHTML = '&#10095;';
+      nextButton.addEventListener('click', function () {
+        currentIndex = (currentIndex + 1) % boxImages.length;
+        fullImage.src = boxImages[currentIndex].src;
+      });
+
+      fullImageContainer.appendChild(fullImage);
+      fullImageContainer.appendChild(closeButton);
+      fullImageContainer.appendChild(prevButton);
+      fullImageContainer.appendChild(nextButton);
+      document.body.appendChild(fullImageContainer);
+    }
+  });
+</script>
+
+</body>
+</html>
+
+
+
